@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunkey Design Systems — 6 ICP Profiles for n8n Content Automation</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8f9fc;
+    --white: #ffffff;
+    --dark: #0d1117;
+    --mid: #1e2630;
+    --text: #1a1f2e;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+
+    --c1: #0052cc;   /* ICP1 – Hardware Startup */
+    --c2: #00875a;   /* ICP2 – Industrial Mfg */
+    --c3: #bf360c;   /* ICP3 – Smart Home OEM */
+    --c4: #6200ea;   /* ICP4 – R&D/Academia */
+    --c5: #d4a017;   /* ICP5 – EMS Buyer */
+    --c6: #0097a7;   /* ICP6 – IoT SaaS Startup */
+
+    --tag-bg: #f1f5f9;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--dark);
+    color: #fff;
+    padding: 52px 60px 44px;
+    border-bottom: 3px solid #232b38;
+  }
+  .header-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #64748b;
+    margin-bottom: 12px;
+  }
+  header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    color: #f0f4ff;
+  }
+  header h1 span { color: #4d8dff; }
+  .header-sub {
+    font-size: 14px;
+    color: #9ca3af;
+    font-weight: 400;
+    max-width: 620px;
+  }
+  .header-meta {
+    margin-top: 20px;
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .header-meta span {
+    font-size: 12px;
+    color: #4b5563;
+    font-family: 'JetBrains Mono', monospace;
+    background: #1a2130;
+    padding: 5px 12px;
+    border-radius: 4px;
+    border: 1px solid #2d3748;
+  }
+  .header-meta span b { color: #a5b4fc; }
+
+  /* ── GRID ── */
+  .grid-wrapper {
+    max-width: 1340px;
+    margin: 0 auto;
+    padding: 48px 40px 80px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  /* ── CARD ── */
+  .icp-card {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s;
+  }
+  .icp-card:hover { box-shadow: 0 6px 28px rgba(0,0,0,0.09); }
+
+  .card-header {
+    padding: 24px 28px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .icp-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--white);
+    padding: 4px 9px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .icp-title-block {}
+  .icp-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .icp-title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--text);
+  }
+  .icp-subtitle {
+    font-size: 12.5px;
+    color: var(--muted);
+    margin-top: 4px;
+    font-weight: 400;
+  }
+
+  .card-body { padding: 22px 28px; }
+
+  /* section inside card */
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+    margin-top: 18px;
+  }
+  .section-label:first-child { margin-top: 0; }
+
+  /* persona row */
+  .persona-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .persona-cell {
+    background: var(--tag-bg);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .persona-cell .pc-label {
+    font-size: 10px;
+    color: var(--muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+  .persona-cell .pc-val {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* tags */
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 11.5px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--tag-bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .tag.service {
+    background: #eff6ff;
+    border-color: #bfdbfe;
+    color: #1d4ed8;
+  }
+
+  /* pain / trigger lists */
+  .point-list { list-style: none; padding: 0; }
+  .point-list li {
+    font-size: 13px;
+    color: var(--text);
+    padding: 5px 0 5px 18px;
+    position: relative;
+    border-bottom: 1px solid #f3f4f6;
+    line-height: 1.45;
+  }
+  .point-list li:last-child { border-bottom: none; }
+  .point-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    font-size: 11px;
+    top: 7px;
+  }
+
+  /* content angles */
+  .angle-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .angle-item {
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.35;
+    border: 1px solid var(--border);
+    background: var(--tag-bg);
+    color: var(--text);
+  }
+  .angle-item .angle-type {
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+
+  /* cta strip */
+  .cta-strip {
+    margin-top: 18px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--white);
+    line-height: 1.35;
+  }
+  .cta-strip .cta-icon { font-size: 16px; flex-shrink: 0; }
+  .cta-strip .cta-text {}
+  .cta-strip .cta-text b { font-weight: 700; }
+
+  /* divider */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 16px 0;
+  }
+
+  /* stat chips */
+  .stat-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .stat-chip {
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+  .stat-chip .sv { font-weight: 700; font-size: 15px; display: block; }
+  .stat-chip .sl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* footer */
+  footer {
+    background: var(--dark);
+    color: #4b5563;
+    text-align: center;
+    font-size: 11.5px;
+    padding: 22px 40px;
+    font-family: 'JetBrains Mono', monospace;
+    border-top: 2px solid #1a2130;
+  }
+  footer span { color: #6b7280; }
+  footer b { color: #9ca3af; }
+
+  /* topic list */
+  .topic-list { list-style: none; padding: 0; counter-reset: topic-counter; }
+  .topic-list li {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text);
+    padding: 7px 10px 7px 36px;
+    position: relative;
+    border-radius: 7px;
+    margin-bottom: 5px;
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    line-height: 1.4;
+    counter-increment: topic-counter;
+  }
+  .topic-list li::before {
+    content: counter(topic-counter);
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+  .topic-list li .topic-format {
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-right: 6px;
+    opacity: 0.7;
+  }
+
+  /* color accents per card */
+  .c1 .icp-num,.c1 .icp-label,.c1 .angle-item .angle-type { color: var(--c1); }
+  .c1 .icp-num { background: var(--c1); color:#fff; }
+  .c1 .cta-strip { background: var(--c1); }
+  .c1 .point-list li::before { color: var(--c1); }
+  .c1 .topic-list li::before { background: var(--c1); }
+  .c1 .topic-list li .topic-format { color: var(--c1); }
+
+  .c2 .icp-num,.c2 .icp-label,.c2 .angle-item .angle-type { color: var(--c2); }
+  .c2 .icp-num { background: var(--c2); color:#fff; }
+  .c2 .cta-strip { background: var(--c2); }
+  .c2 .point-list li::before { color: var(--c2); }
+  .c2 .topic-list li::before { background: var(--c2); }
+  .c2 .topic-list li .topic-format { color: var(--c2); }
+
+  .c3 .icp-num,.c3 .icp-label,.c3 .angle-item .angle-type { color: var(--c3); }
+  .c3 .icp-num { background: var(--c3); color:#fff; }
+  .c3 .cta-strip { background: var(--c3); }
+  .c3 .point-list li::before { color: var(--c3); }
+  .c3 .topic-list li::before { background: var(--c3); }
+  .c3 .topic-list li .topic-format { color: var(--c3); }
+
+  .c4 .icp-num,.c4 .icp-label,.c4 .angle-item .angle-type { color: var(--c4); }
+  .c4 .icp-num { background: var(--c4); color:#fff; }
+  .c4 .cta-strip { background: var(--c4); }
+  .c4 .point-list li::before { color: var(--c4); }
+  .c4 .topic-list li::before { background: var(--c4); }
+  .c4 .topic-list li .topic-format { color: var(--c4); }
+
+  .c5 .icp-num,.c5 .icp-label,.c5 .angle-item .angle-type { color: var(--c5); }
+  .c5 .icp-num { background: var(--c5); color:#fff; }
+  .c5 .cta-strip { background: var(--c5); }
+  .c5 .point-list li::before { color: var(--c5); }
+  .c5 .topic-list li::before { background: var(--c5); }
+  .c5 .topic-list li .topic-format { color: var(--c5); }
+
+  .c6 .icp-num,.c6 .icp-label,.c6 .angle-item .angle-type { color: var(--c6); }
+  .c6 .icp-num { background: var(--c6); color:#fff; }
+  .c6 .cta-strip { background: var(--c6); }
+  .c6 .point-list li::before { color: var(--c6); }
+  .c6 .topic-list li::before { background: var(--c6); }
+  .c6 .topic-list li .topic-format { color: var(--c6); }
+
+  @media (max-width: 900px) {
+    .grid-wrapper { grid-template-columns: 1fr; padding: 32px 20px 60px; }
+    header { padding: 36px 24px 30px; }
+    header h1 { font-size: 24px; }
+    .angle-grid { grid-template-columns: 1fr; }
+    .persona-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow">Sunkey Design Systems · ICP Intelligence</div>
+  <h1>6 Ideal Customer Profiles<br><span>for n8n Content Automation</span></h1>
+  <p class="header-sub">Built from full website analysis across 22 sitemap pages — Engineering Design, Electronic Design, Manufacturing, and IoT verticals. Each profile is production-ready for n8n round-robin content pipeline.</p>
+  <div class="header-meta">
+    <span>Brand: <b>Sunkey Design Systems Pvt Ltd</b></span>
+    <span>Location: <b>Chennai, Tamil Nadu</b></span>
+    <span>Services: <b>PCB · PCBA · IoT · Hardware · Firmware · Mechanical</b></span>
+    <span>Profiles: <b>6 ICPs · n8n-ready</b></span>
+  </div>
+</header>
+
+<div class="grid-wrapper">
+
+  <!-- ══════════════════════════════════════════ ICP 1 ══ -->
+  <div class="icp-card c1">
+    <div class="card-header">
+      <div class="icp-num">ICP 01</div>
+      <div class="icp-title-block">
+        <div class="icp-label">Hardware Product Startup</div>
+        <div class="icp-title">The First-Time Hardware Founder</div>
+        <div class="icp-subtitle">Building a connected device from scratch with no in-house EE team</div>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="section-label">Persona Snapshot</div>
+      <div class="persona-row">
+        <div class="persona-cell"><div class="pc-label">Role</div><div class="pc-val">Founder / CTO</div></div>
+        <div class="persona-cell"><div class="pc-label">Company Size</div><div class="pc-val">1–15 people</div></div>
+        <div class="persona-cell"><div class="pc-label">Stage</div><div class="pc-val">Seed / Pre-Series A</div></div>
+        <div class="persona-cell"><div class="pc-label">Location</div><div class="pc-val">India / SE Asia</div></div>
+      </div>
+
+      <div class="section-label">Services They Need</div>
+      <div class="tags">
+        <span class="tag service">PCB Design</span>
+        <span class="tag service">Hardware Design</span>
+        <span class="tag service">Firmware</span>
+        <span class="tag service">Prototyping</span>
+        <span class="tag service">PCBA</span>
+        <span class="tag service">Design for Manufacturability</span>
+      </div>
+
+      <div class="section-label">Pain Points</div>
+      <ul class="point-list">
+        <li>No in-house electrical engineer; stuck between idea and first prototype</li>
+        <li>Doesn't know how to spec a PCB or choose between MCUs/SoCs</li>
+        <li>Burned by freelancers delivering unusable Gerber files</li>
+        <li>NRE (non-recurring engineering) costs feel opaque and risky</li>
+        <li>Fear of design-to-manufacture mismatch killing first production run</li>
+      </ul>
+
+      <div class="section-label">Buying Trigger</div>
+      <ul class="point-list">
+        <li>Just raised a seed round and needs to hit prototype milestone</li>
+        <li>Investor demo deadline creating urgency for working hardware</li>
+        <li>Failed freelancer engagement prompts search for structured partner</li>
+      </ul>
+
+      <div class="section-label">Content Angles (n8n Rotation)</div>
+      <div class="angle-grid">
+        <div class="angle-item"><div class="angle-type">Educational</div>PCB design checklist before handing off to a manufacturer</div>
+        <div class="angle-item"><div class="angle-type">Authority</div>Why DFM review at design stage saves 40% in NRE rework</div>
+        <div class="angle-item"><div class="angle-type">Story</div>From napkin sketch to functional prototype in 8 weeks — what it actually takes</div>
+        <div class="angle-item"><div class="angle-type">Comparison</div>In-house EE hire vs outsourced hardware design partner — cost breakdown</div>
+      </div>
+
+      <div class="stat-row" style="margin-top:14px;">
+        <div class="stat-chip"><span class="sv">PCB / Firmware</span><span class="sl">Primary service pull</span></div>
+        <div class="stat-chip"><span class="sv">8–14 wks</span><span class="sl">Avg. sales cycle</span></div>
+        <div class="stat-chip"><span class="sv">LinkedIn / Search</span><span class="sl">Discovery channel</span></div>
+      </div>
+
+      <div class="section-label">5 Content Topics for This ICP</div>
+      <ul class="topic-list">
+        <li><span class="topic-format">Blog</span> "PCB Design for Non-Engineers: What Every Hardware Founder Needs to Know Before Talking to a Design Firm"</li>
+        <li><span class="topic-format">Checklist</span> "17-Point Pre-Production PCB Checklist — Catch Design Errors Before They Hit Manufacturing"</li>
+        <li><span class="topic-format">Comparison</span> "Freelance EE vs Full-Service Design Partner: A True Cost Breakdown for Early-Stage Startups"</li>
+        <li><span class="topic-format">How-To</span> "How to Choose the Right Microcontroller for Your First IoT Product (Without an EE Degree)"</li>
+        <li><span class="topic-format">Case Study</span> "0 to Working Prototype in 8 Weeks: What a Hardware Startup Actually Needs from a Design Partner"</li>
+      </ul>
+
+      <div class="cta-strip">
+        <span class="cta-icon">🎯</span>
+        <div class="cta-text"><b>Content CTA:</b> "Get a free PCB design feasibility review before you commit to production" — drives initial conversation, low barrier.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ ICP 2 ══ -->
+  <div class="icp-card c2">
+    <div class="card-header">
+      <div class="icp-num">ICP 02</div>
+      <div class="icp-title-block">
+        <div class="icp-label">Industrial Manufacturing</div>
+        <div class="icp-title">The Operations / Automation Lead</div>
+        <div class="icp-subtitle">Mid-size manufacturer modernising shop-floor with IIoT and predictive maintenance</div>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="section-label">Persona Snapshot</div>
+      <div class="persona-row">
+        <div class="persona-cell"><div class="pc-label">Role</div><div class="pc-val">VP Operations / Plant Manager</div></div>
+        <div class="persona-cell"><div class="pc-label">Company Size</div><div class="pc-val">100–2,000 employees</div></div>
+        <div class="persona-cell"><div class="pc-label">Stage</div><div class="pc-val">Industry 4.0 Transition</div></div>
+        <div class="persona-cell"><div class="pc-label">Sector</div><div class="pc-val">Auto / FMCG / Textile</div></div>
+      </div>
+
+      <div class="section-label">Services They Need</div>
+      <div class="tags">
+        <span class="tag service">Industrial IoT</span>
+        <span class="tag service">Predictive Maintenance</span>
+        <span class="tag service">Real-time Monitoring</span>
+        <span class="tag service">Edge Computing</span>
+        <span class="tag service">Level Monitoring</span>
+        <span class="tag service">Industrial Automation</span>
+      </div>
+
+      <div class="section-label">Pain Points</div>
+      <ul class="point-list">
+        <li>Unplanned downtime costing ₹lakhs per hour — no early warning system</li>
+        <li>Manual inventory / tank level checks leading to production stoppages</li>
+        <li>Legacy PLCs can't talk to modern cloud dashboards</li>
+        <li>IT/OT integration complexity overwhelming internal team</li>
+        <li>Board pressure to show ROI on automation spend within 12 months</li>
+      </ul>
+
+      <div class="section-label">Buying Trigger</div>
+      <ul class="point-list">
+        <li>A major breakdown or near-miss incident creates urgency</li>
+        <li>Competitor plant reportedly reducing downtime with IIoT rollout</li>
+        <li>CapEx budget approval window opening (Q3/Q4 FY planning)</li>
+      </ul>
+
+      <div class="section-label">Content Angles (n8n Rotation)</div>
+      <div class="angle-grid">
+        <div class="angle-item"><div class="angle-type">Data-Led</div>Real-world ROI of predictive maintenance: downtime cost vs sensor deployment cost</div>
+        <div class="angle-item"><div class="angle-type">How-To</div>Retrofitting legacy machines with IoT sensors without halting production</div>
+        <div class="angle-item"><div class="angle-type">Authority</div>What edge computing means for shopfloor latency vs cloud-only architectures</div>
+        <div class="angle-item"><div class="angle-type">Use Case</div>Tank level monitoring automation — how one FMCG plant eliminated manual checks</div>
+      </div>
+
+      <div class="stat-row" style="margin-top:14px;">
+        <div class="stat-chip"><span class="sv">IIoT / Automation</span><span class="sl">Primary service pull</span></div>
+        <div class="stat-chip"><span class="sv">3–6 months</span><span class="sl">Avg. sales cycle</span></div>
+        <div class="stat-chip"><span class="sv">Trade events / LinkedIn</span><span class="sl">Discovery channel</span></div>
+      </div>
+
+      <div class="section-label">5 Content Topics for This ICP</div>
+      <ul class="topic-list">
+        <li><span class="topic-format">Blog</span> "How Indian Manufacturers Can Calculate the True ROI of IIoT Before Signing a Single Vendor Contract"</li>
+        <li><span class="topic-format">Guide</span> "Retrofitting Legacy PLCs with IoT Sensors: A Step-by-Step Shopfloor Integration Playbook"</li>
+        <li><span class="topic-format">Explainer</span> "Predictive Maintenance vs Preventive Maintenance: What Sensors, Data, and Edge Computing Actually Changes on the Factory Floor"</li>
+        <li><span class="topic-format">Use Case</span> "Tank Level Monitoring Automation: How One FMCG Plant Eliminated ₹40L/Year in Manual Checks and Overflow Losses"</li>
+        <li><span class="topic-format">Authority</span> "IT/OT Convergence for Mid-Size Manufacturers: Why Your Existing PLC Infrastructure Is More IoT-Ready Than You Think"</li>
+      </ul>
+
+      <div class="cta-strip">
+        <span class="cta-icon">🎯</span>
+        <div class="cta-text"><b>Content CTA:</b> "Download the IIoT deployment readiness checklist for mid-size manufacturers" — gated lead magnet, positions Sunkey as IIoT authority.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ ICP 3 ══ -->
+  <div class="icp-card c3">
+    <div class="card-header">
+      <div class="icp-num">ICP 03</div>
+      <div class="icp-title-block">
+        <div class="icp-label">Consumer Electronics OEM</div>
+        <div class="icp-title">The Smart Home / Lighting Product Manager</div>
+        <div class="icp-subtitle">OEM brand building smart home or lighting SKUs for Indian / export retail</div>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="section-label">Persona Snapshot</div>
+      <div class="persona-row">
+        <div class="persona-cell"><div class="pc-label">Role</div><div class="pc-val">Product Manager / Founder</div></div>
+        <div class="persona-cell"><div class="pc-label">Company Size</div><div class="pc-val">20–200 employees</div></div>
+        <div class="persona-cell"><div class="pc-label">Stage</div><div class="pc-val">Scale / SKU expansion</div></div>
+        <div class="persona-cell"><div class="pc-label">Sector</div><div class="pc-val">Consumer Electronics</div></div>
+      </div>
+
+      <div class="section-label">Services They Need</div>
+      <div class="tags">
+        <span class="tag service">Smart Home IoT</span>
+        <span class="tag service">Smart Lighting IoT</span>
+        <span class="tag service">PCB Design</span>
+        <span class="tag service">PCB Layout</span>
+        <span class="tag service">PCBA</span>
+        <span class="tag service">Box Build</span>
+        <span class="tag service">Firmware</span>
+      </div>
+
+      <div class="section-label">Pain Points</div>
+      <ul class="point-list">
+        <li>Struggling to differentiate from Chinese white-label competitors on price alone</li>
+        <li>Firmware bugs in voice assistant integration (Alexa/Google) causing returns</li>
+        <li>No reliable PCBA partner who can also help with enclosure/box build</li>
+        <li>BIS / CE certification delays from design-level compliance gaps</li>
+        <li>Color temperature accuracy inconsistency across production batches (lighting)</li>
+      </ul>
+
+      <div class="section-label">Buying Trigger</div>
+      <ul class="point-list">
+        <li>New SKU roadmap approved for next festive season launch</li>
+        <li>Current CM raised MOQ or changed pricing, forcing re-sourcing</li>
+        <li>Quality complaints from e-commerce channel triggering design review</li>
+      </ul>
+
+      <div class="section-label">Content Angles (n8n Rotation)</div>
+      <div class="angle-grid">
+        <div class="angle-item"><div class="angle-type">Technical</div>Voice control integration pitfalls in smart home PCB firmware design</div>
+        <div class="angle-item"><div class="angle-type">Authority</div>Design-for-compliance: BIS/CE certification starts at PCB layout, not after</div>
+        <div class="angle-item"><div class="angle-type">Educational</div>Tunable white vs RGBW smart lighting — PCB design tradeoffs explained</div>
+        <div class="angle-item"><div class="angle-type">Story</div>How an Indian smart lighting brand cut returns by 60% with PCB redesign</div>
+      </div>
+
+      <div class="stat-row" style="margin-top:14px;">
+        <div class="stat-chip"><span class="sv">PCB + IoT + Box Build</span><span class="sl">Primary service pull</span></div>
+        <div class="stat-chip"><span class="sv">4–10 wks</span><span class="sl">Avg. sales cycle</span></div>
+        <div class="stat-chip"><span class="sv">LinkedIn / Referral</span><span class="sl">Discovery channel</span></div>
+      </div>
+
+      <div class="section-label">5 Content Topics for This ICP</div>
+      <ul class="topic-list">
+        <li><span class="topic-format">Blog</span> "Why Indian Smart Home Brands Lose to Chinese White-Labels — and How PCB Design Is the Real Differentiator"</li>
+        <li><span class="topic-format">Technical</span> "Alexa & Google Home Integration: The Firmware Pitfalls That Cause Smart Device Returns (and How to Avoid Them)"</li>
+        <li><span class="topic-format">Guide</span> "BIS & CE Certification for Smart Electronics: What Your PCB Layout Must Get Right Before You File"</li>
+        <li><span class="topic-format">Explainer</span> "Tunable White vs RGBW Smart Lighting: PCB Design Trade-offs That Affect Your Product Margin at Scale"</li>
+        <li><span class="topic-format">Checklist</span> "Smart Home Product Launch Readiness Checklist: PCB, Firmware, Compliance, and Box Build Validation in One Place"</li>
+      </ul>
+
+      <div class="cta-strip">
+        <span class="cta-icon">🎯</span>
+        <div class="cta-text"><b>Content CTA:</b> "Get a free smart product PCB audit — we'll flag 3 design issues before you go to production" — high relevance, positions Sunkey as trusted QA partner.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ ICP 4 ══ -->
+  <div class="icp-card c4">
+    <div class="card-header">
+      <div class="icp-num">ICP 04</div>
+      <div class="icp-title-block">
+        <div class="icp-label">R&D / Academia / Defence</div>
+        <div class="icp-title">The Research Engineer / Lab Head</div>
+        <div class="icp-subtitle">University research labs, DRDO-adjacent projects, or corporate R&D requiring custom electronics</div>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="section-label">Persona Snapshot</div>
+      <div class="persona-row">
+        <div class="persona-cell"><div class="pc-label">Role</div><div class="pc-val">Principal Engineer / Professor</div></div>
+        <div class="persona-cell"><div class="pc-label">Company Size</div><div class="pc-val">Varies (institution)</div></div>
+        <div class="persona-cell"><div class="pc-label">Stage</div><div class="pc-val">Proof-of-Concept / Pilot</div></div>
+        <div class="persona-cell"><div class="pc-label">Sector</div><div class="pc-val">R&D / Defence / Space</div></div>
+      </div>
+
+      <div class="section-label">Services They Need</div>
+      <div class="tags">
+        <span class="tag service">PCB Design Service</span>
+        <span class="tag service">SI/PI Analysis</span>
+        <span class="tag service">Hardware Design</span>
+        <span class="tag service">Reverse Engineering</span>
+        <span class="tag service">Test Fixtures</span>
+        <span class="tag service">Thermal Analysis</span>
+        <span class="tag service">Prototyping</span>
+      </div>
+
+      <div class="section-label">Pain Points</div>
+      <ul class="point-list">
+        <li>Need multi-layer, high-speed PCBs with BGA/QFN that generalist CMs won't touch</li>
+        <li>SI/PI analysis required for mil-spec or high-reliability applications</li>
+        <li>Legacy equipment needing reverse engineering for spares or upgrades</li>
+        <li>Tight procurement process — vendor needs verifiable credentials and documentation</li>
+        <li>Low volumes make most large CM partners uninterested or overpriced</li>
+      </ul>
+
+      <div class="section-label">Buying Trigger</div>
+      <ul class="point-list">
+        <li>Grant or project fund release with specific hardware deliverable milestone</li>
+        <li>Existing vendor unable to handle high-speed or high-density design spec</li>
+        <li>Test fixture needed for in-lab validation of custom prototype</li>
+      </ul>
+
+      <div class="section-label">Content Angles (n8n Rotation)</div>
+      <div class="angle-grid">
+        <div class="angle-item"><div class="angle-type">Deep-Tech</div>Signal integrity analysis 101 for high-speed PCB designs — differential pairs and impedance matching</div>
+        <div class="angle-item"><div class="angle-type">Technical</div>When to use BGA vs QFN packages in dense, high-reliability PCB designs</div>
+        <div class="angle-item"><div class="angle-type">Authority</div>Reverse engineering for legacy PCB replacement: methodology, risks, and IPC compliance</div>
+        <div class="angle-item"><div class="angle-type">How-To</div>Designing custom test fixtures that cut lab validation time by 50%</div>
+      </div>
+
+      <div class="stat-row" style="margin-top:14px;">
+        <div class="stat-chip"><span class="sv">PCB / SI-PI / Test Fixtures</span><span class="sl">Primary service pull</span></div>
+        <div class="stat-chip"><span class="sv">2–5 months</span><span class="sl">Avg. sales cycle</span></div>
+        <div class="stat-chip"><span class="sv">Referral / Technical blogs</span><span class="sl">Discovery channel</span></div>
+      </div>
+
+      <div class="section-label">5 Content Topics for This ICP</div>
+      <ul class="topic-list">
+        <li><span class="topic-format">Deep-Tech</span> "Signal Integrity Analysis for High-Speed PCBs: Differential Pairs, Impedance Matching, and When to Run SI/PI Simulation"</li>
+        <li><span class="topic-format">Technical</span> "BGA vs QFN Packages in High-Reliability PCB Design: Choosing Based on Thermal, Density, and Inspection Constraints"</li>
+        <li><span class="topic-format">Guide</span> "Reverse Engineering Legacy PCBs for Replacement or Upgrade: Methodology, Legal Boundaries, and IPC Compliance"</li>
+        <li><span class="topic-format">How-To</span> "Designing Custom Test Fixtures for In-Lab PCB Validation: Reducing Setup Time and Improving Repeatability"</li>
+        <li><span class="topic-format">Authority</span> "Multi-Layer PCB Design for High-Density Research Hardware: Stack-Up Strategy, Via Types, and Thermal Management"</li>
+      </ul>
+
+      <div class="cta-strip">
+        <span class="cta-icon">🎯</span>
+        <div class="cta-text"><b>Content CTA:</b> "Download our high-speed PCB design spec sheet — includes IPC compliance checklist and SI/PI analysis approach" — credibility builder for technical buyers.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ ICP 5 ══ -->
+  <div class="icp-card c5">
+    <div class="card-header">
+      <div class="icp-num">ICP 05</div>
+      <div class="icp-title-block">
+        <div class="icp-label">Electronics Procurement / Sourcing</div>
+        <div class="icp-title">The EMS Buyer at a Scaling OEM</div>
+        <div class="icp-subtitle">Procurement or supply chain head at a mid-large OEM diversifying their electronics manufacturing supply chain</div>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="section-label">Persona Snapshot</div>
+      <div class="persona-row">
+        <div class="persona-cell"><div class="pc-label">Role</div><div class="pc-val">Head of Procurement / SCM</div></div>
+        <div class="persona-cell"><div class="pc-label">Company Size</div><div class="pc-val">200–5,000 employees</div></div>
+        <div class="persona-cell"><div class="pc-label">Stage</div><div class="pc-val">Vendor Diversification</div></div>
+        <div class="persona-cell"><div class="pc-label">Sector</div><div class="pc-val">Electronics / Auto / Energy</div></div>
+      </div>
+
+      <div class="section-label">Services They Need</div>
+      <div class="tags">
+        <span class="tag service">PCBA</span>
+        <span class="tag service">Box Build</span>
+        <span class="tag service">Test Fixtures</span>
+        <span class="tag service">Component Sourcing</span>
+        <span class="tag service">Design Modification</span>
+        <span class="tag service">DFM Review</span>
+      </div>
+
+      <div class="section-label">Pain Points</div>
+      <ul class="point-list">
+        <li>Over-reliance on single PCBA vendor creating supply chain risk</li>
+        <li>Imported components facing longer lead times post-2023 chip shortage</li>
+        <li>Quality inconsistency from current CM — rejects eating into margins</li>
+        <li>Component obsolescence causing sudden mid-production design changes</li>
+        <li>Needs both SMT and THT capability in one partner, not split across vendors</li>
+      </ul>
+
+      <div class="section-label">Buying Trigger</div>
+      <ul class="point-list">
+        <li>Current vendor delivery miss or quality failure triggers re-qualification</li>
+        <li>Annual vendor audit revealing capability gaps with existing CM</li>
+        <li>New product line requiring mixed SMT+THT assembly capabilities</li>
+      </ul>
+
+      <div class="section-label">Content Angles (n8n Rotation)</div>
+      <div class="angle-grid">
+        <div class="angle-item"><div class="angle-type">Business Case</div>Why Indian OEMs are building multi-CM PCBA strategies in 2025 — supply chain resilience</div>
+        <div class="angle-item"><div class="angle-type">Technical</div>SMT vs THT vs mixed assembly — choosing the right PCBA process for your design</div>
+        <div class="angle-item"><div class="angle-type">Operational</div>What to audit when qualifying a new PCBA partner — 12-point checklist</div>
+        <div class="angle-item"><div class="angle-type">Authority</div>Component obsolescence management: how proactive DFM reviews prevent line stoppages</div>
+      </div>
+
+      <div class="stat-row" style="margin-top:14px;">
+        <div class="stat-chip"><span class="sv">PCBA / Box Build</span><span class="sl">Primary service pull</span></div>
+        <div class="stat-chip"><span class="sv">1–4 months</span><span class="sl">Avg. sales cycle</span></div>
+        <div class="stat-chip"><span class="sv">LinkedIn / Industry portals</span><span class="sl">Discovery channel</span></div>
+      </div>
+
+      <div class="section-label">5 Content Topics for This ICP</div>
+      <ul class="topic-list">
+        <li><span class="topic-format">Blog</span> "Why Indian OEMs Are Building Multi-CM PCBA Strategies in 2025 — Supply Chain Resilience Beyond Single-Vendor Dependency"</li>
+        <li><span class="topic-format">Checklist</span> "12-Point PCBA Vendor Qualification Checklist: What to Audit Before You Transfer a BOM to a New Contract Manufacturer"</li>
+        <li><span class="topic-format">Technical</span> "SMT vs THT vs Mixed Assembly: Choosing the Right PCBA Process for Your Product Design and Volume Requirements"</li>
+        <li><span class="topic-format">Authority</span> "Component Obsolescence Management: How DFM Reviews at the Design Stage Prevent Emergency Line Stoppages in Production"</li>
+        <li><span class="topic-format">Explainer</span> "What 'Quality Assurance in PCBA' Actually Means: AOI, X-Ray Inspection, ICT, and Functional Test — Explained for Procurement Teams"</li>
+      </ul>
+
+      <div class="cta-strip">
+        <span class="cta-icon">🎯</span>
+        <div class="cta-text"><b>Content CTA:</b> "Request a PCBA capability overview + sample quality documentation pack" — procurement-friendly proof of vendor credibility.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ ICP 6 ══ -->
+  <div class="icp-card c6">
+    <div class="card-header">
+      <div class="icp-num">ICP 06</div>
+      <div class="icp-title-block">
+        <div class="icp-label">IoT / SaaS Platform Startup</div>
+        <div class="icp-title">The IoT Platform CTO / Co-founder</div>
+        <div class="icp-subtitle">Software-first team that needs a hardware partner to build the physical edge device for their IoT SaaS platform</div>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="section-label">Persona Snapshot</div>
+      <div class="persona-row">
+        <div class="persona-cell"><div class="pc-label">Role</div><div class="pc-val">CTO / Co-founder</div></div>
+        <div class="persona-cell"><div class="pc-label">Company Size</div><div class="pc-val">5–50 employees</div></div>
+        <div class="persona-cell"><div class="pc-label">Stage</div><div class="pc-val">Series A / B</div></div>
+        <div class="persona-cell"><div class="pc-label">Sector</div><div class="pc-val">AgriTech / HealthTech / ClimateTech</div></div>
+      </div>
+
+      <div class="section-label">Services They Need</div>
+      <div class="tags">
+        <span class="tag service">IoT Hardware Design</span>
+        <span class="tag service">Firmware</span>
+        <span class="tag service">PCB Design</span>
+        <span class="tag service">Edge Computing</span>
+        <span class="tag service">AI Integration</span>
+        <span class="tag service">PCBA</span>
+        <span class="tag service">Software Integration</span>
+      </div>
+
+      <div class="section-label">Pain Points</div>
+      <ul class="point-list">
+        <li>Strong cloud/software capability but zero hardware engineering bandwidth</li>
+        <li>Proof-of-concept built on dev boards (Raspberry Pi / Arduino) that won't scale</li>
+        <li>Needs production-ready PCB + firmware that talks to their existing cloud APIs</li>
+        <li>Connectivity reliability (MQTT/LoRa/4G) in harsh or remote deployments</li>
+        <li>Investors asking for production-ready hardware cost model before next raise</li>
+      </ul>
+
+      <div class="section-label">Buying Trigger</div>
+      <ul class="point-list">
+        <li>Dev board prototype has been validated with pilot customers — time to productionize</li>
+        <li>Series A funding close creating runway to commission proper hardware design</li>
+        <li>Enterprise customer deal contingent on compliant, production-grade device</li>
+      </ul>
+
+      <div class="section-label">Content Angles (n8n Rotation)</div>
+      <div class="angle-grid">
+        <div class="angle-item"><div class="angle-type">Educational</div>From Raspberry Pi to custom PCB: when and how to make the productionization jump</div>
+        <div class="angle-item"><div class="angle-type">Technical</div>Choosing the right wireless protocol for your IoT edge device — LoRa vs NB-IoT vs 4G</div>
+        <div class="angle-item"><div class="angle-type">Authority</div>AI at the edge: integrating on-device inference into IoT firmware design</div>
+        <div class="angle-item"><div class="angle-type">Story</div>How a SaaS-first AgriTech startup shipped 2,000 production sensors in 6 months</div>
+      </div>
+
+      <div class="stat-row" style="margin-top:14px;">
+        <div class="stat-chip"><span class="sv">IoT HW + Firmware</span><span class="sl">Primary service pull</span></div>
+        <div class="stat-chip"><span class="sv">6–12 wks</span><span class="sl">Avg. sales cycle</span></div>
+        <div class="stat-chip"><span class="sv">Startup ecosystems / LinkedIn</span><span class="sl">Discovery channel</span></div>
+      </div>
+
+      <div class="section-label">5 Content Topics for This ICP</div>
+      <ul class="topic-list">
+        <li><span class="topic-format">Blog</span> "From Raspberry Pi to Custom PCB: When Your IoT Startup Should Make the Hardware Productionization Jump"</li>
+        <li><span class="topic-format">Technical</span> "LoRa vs NB-IoT vs 4G LTE-M: Choosing the Right Wireless Protocol for Your Edge IoT Device in 2025"</li>
+        <li><span class="topic-format">Authority</span> "AI at the Edge: How to Integrate On-Device Inference into IoT Firmware Without Blowing Up Power Budget or BOM Cost"</li>
+        <li><span class="topic-format">Case Study</span> "How an AgriTech SaaS Startup Shipped 2,000 Production Sensors in 6 Months — From Dev Board to Full PCBA"</li>
+        <li><span class="topic-format">Guide</span> "Cloud-to-Hardware Architecture for IoT Startups: Mapping Your MQTT/REST APIs to a Production-Grade Edge Device Design"</li>
+      </ul>
+
+      <div class="cta-strip">
+        <span class="cta-icon">🎯</span>
+        <div class="cta-text"><b>Content CTA:</b> "Book a free IoT device architecture call — we'll map your cloud platform to a production-ready hardware design" — consultative, high intent.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /grid -->
+
+<footer>
+  Girish Kumar G | Programmatic SEO Manager &nbsp;·&nbsp; <b>Father of SEO</b> &nbsp;·&nbsp; Prepared for Sunkey Design Systems Pvt Ltd &nbsp;·&nbsp; 6 ICPs · n8n Content Automation Ready
+</footer>
+
+</body>
+</html>
